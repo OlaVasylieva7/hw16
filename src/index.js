@@ -40,7 +40,7 @@ function renderCountryList(countryList) {
 }
 
 function fetchResponse(countries) {
-  if (countries.lenght > 1 && countries.lenght <= 10) {
+  if (countries.length > 1 && countries.length <= 10) {
     const countryList = countries
       .map(country => {
         return `
