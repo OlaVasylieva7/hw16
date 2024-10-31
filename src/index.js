@@ -2,6 +2,7 @@ import debounce from 'lodash.debounce';
 import { alert, error as notifyError, info as notifyInfo } from '@pnotify/core';
 import '@pnotify/core/dist/PNotify.css';
 import fetchCountries from './js/fetchCountries';
+import '@pnotify/core/dist/BrightTheme.css';
 
 const input = document.getElementById('input');
 const list = document.getElementById('list');
