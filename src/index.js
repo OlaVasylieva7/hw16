@@ -40,14 +40,36 @@ function renderCountryList(countryList) {
 }
 
 function fetchResponse(countries) {
-  if (countries.length > 1 && countries.length <= 10) {
+  clearData();
+
+  if (countries.length > 10) {
+    notifyInfo({
+      text: 'too many matches found. please enter a more specific query!',
+      delay: 2000,
+    });
+  } else if (countries.length > 1 && countries.length <= 10) {
     const countryList = countries
-      .map(country => {
-        return `
-      <li><img class="list__img" src="${country.flags.svg}"><p>${country.name.official}</p></li>
-      `;
-      })
-      .join();
+      .map(
+        country => `
+          <li><img class="list__img" src="${country.flags.svg}" width="30">
+          <p>${country.name.official}</p></li>
+        `
+      )
+      .join('');
     renderCountryList(countryList);
+  } else if (countries.length === 1) {
+    const selectedCountry = countries[0];
+    const countryInfo = `
+      <h2>${selectedCountry.name.official}</h2>
+      <p><strong>Capital:</strong> ${selectedCountry.capital}</p>
+      <p><strong>Population:</strong> ${selectedCountry.population}</p>
+      <p><strong>Languages:</strong> ${Object.values(
+        selectedCountry.languages
+      ).join(', ')}</p>
+      <img src="${selectedCountry.flags.svg}" alt="Flag of ${
+      selectedCountry.name.official
+    }" width="100">
+    `;
+    renderCountry(countryInfo);
   }
 }
